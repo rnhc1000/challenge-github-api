@@ -1,27 +1,122 @@
-# React + TypeScript + Vite
+## useState/useEffect/axios Challenge - ReactJS Professional - @devsuperior -
+ReactJS Professional Challenge on hooks/axios
+- Components
+- Routes
+- Yarn
+- Vite
+- Axios
+## _Table of contents_
+- [Overview](#overview)
+- [Screenshot](#screenshot)
+- [Links](#links)
+- [Built with](#built-with)
+- [What I practiced](#what-i-practiced)
+- [Continued development](#continued-development)
+- [Resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+## _Overview_
+The design is structured as shown:
+- src|
+    - assets|
+    - components|
+        - About
+          - index.tsx
+          - styles.css
+        - HomeBody
+        - NotFoundPage
+        - Product
+        - ProductsMenu
+   - routes
+        - About Us
+        - BodyHome
+        - Home
+        - NotFound
+        - Products
+            - Books
+            - Computers
+            - Electronics
+   - App.tsx
+   - index.css
+   - main.tsx
+   - index.html
+   - tsconfig.json
+   - tsconfig.node.json
+   - vite.config.js
+   - yarn.lock
+- public|
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## _Screenshot_
+[![](./challengeGitHubAPI.png)]()
+## _Links_
+- Live Site URL: [] 
+## _Built with_
 
-Currently, two official plugins are available:
+ ![](https://ferreiras.dev.br/assets/images/icons/git-scm-icon.svg) | ![](https://ferreiras.dev.br/assets/images/icons/react.svg) | ![](https://ferreiras.dev.br/assets/images/icons/vite.svg) | ![](https://ferreiras.dev.br/assets/images/icons/yarn-title.svg) | ![](https://ferreiras.dev.br/assets/images/icons/ts-logo.svg) | ![](https://ferreiras.dev.br/assets/images/icons/icons8-javascript.svg) | ![](https://ferreiras.dev.br/assets/images/icons/icons8-visual-studio-code.svg) | ![](https://ferreiras.dev.br/assets/images/icons/axios-logo.svg)| ![](https://ferreiras.dev.br/assets/images/icons/react-router-stacked-color-inverted.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ ## _What I practiced_
+```jsx
+import './styles.css';
+import SearchBar from '../../../components/SearchBar';
+import CatalogCard from '../../../components/CatalogCard';
+import LoadBar from '../../../components/LoadBar';
+import * as productService from '../../../services/product-service';
+import { useEffect, useState } from 'react';
+import { ProductDTO } from '../../../models/product';
+// import axios from 'axios';
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+export default function Catalog() {
 
-- Configure the top-level `parserOptions` property like this:
+  /**
+   * 1. useState criado como uma lista de produtos
+   * e inicializado com um lista vazia[]
+   */
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+  const [products, setProducts] = useState<ProductDTO[]>([]);
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+  /**
+   * Ao montar o componente buscar os primeiros elementos
+   * useEffect(() => {}, []) argumento função e lista de dependencias
+   */
+
+  useEffect(() => {
+    productService.findAll()
+    .then(response => {
+      setProducts(response.data.content)
+    });
+  },[]);
+  return (
+    <>
+      <main>
+        <section id="dsc-catalog-section" className="dsc-container">
+          <SearchBar />
+
+          <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
+            {
+              // productService.findAll().map(product => <CatalogCard key={product.id} product={product} />)
+              products.map(product => <CatalogCard key={product.id} product={product} />)
+
+            }
+
+          </div>
+
+          <LoadBar />
+        </section>
+      </main>
+    </>
+  );
+}
+
+``` 
+
+## _Continued development_
+- Next challenge: Moving forward 
+### _Useful resources_
+- [https://reactrouter.com/] React Router enables "client side routing".
+- [https://reactjs.org] React lets you build user interfaces out of individual pieces called components!.
+- [https://yarnpkg.org/] Open-source package manager used to manage dependencies in  JavaScript.
+- [https://vitejs.dev/guide/] Build tool that aims to provide a faster and leaner development experience for modern web projects.
+## _Author_
+- Website - [https://ferreiras.dev.br] 
+## Acknowledgments
