@@ -1,16 +1,30 @@
 .header-container {
 
     display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 62px;
     background-color: var(--color-bg-header);
     align-items: center;
-  }
+    margin: 0 auto;
+}
 
-  .text-header {
 
+.header-container-text {
     font-size: 24px;
+    line-height: 19.36px;
+    font-weight: 400;
     color: var(--color-text-header);
     margin-left: 41px;
+}
 
-  }
+.header-container-text p {
+    display: flex;
+    justify-content: space-between;
+    gap: 960px;
+}
+
+.nav-img {
+    width: 20px;
+    height: 20px;   
+}
