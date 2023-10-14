@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import ProfileNotFound from "./routes/ProfileNotFound";
-import SearchProfile from "./routes/SearchProfile";
-import ReturnProfile from "./routes/ReturnProfile";
+import ProfileSearch from "./routes/ProfileSearch";
+// import ReturnProfile from "./routes/ReturnProfile";
 
 function App() {
 
@@ -13,8 +13,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}></Route>
             <Route path="*" element={<ProfileNotFound />}></Route>
-            <Route path="search" element={<SearchProfile />}></Route>
-            <Route path="profile" element={<ReturnProfile />}></Route>
+            <Route path="search" element={<ProfileSearch />}></Route>
+            {/* <Route path="profile" element={<ReturnProfile />}></Route> */}
           </Routes>
         </BrowserRouter>
       </main>

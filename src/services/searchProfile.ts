@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { BASE_URL } from '../utils/system';
 
 
-export function findByProfileNickName(id: string)  {
-    return axios.get(`${BASE_URL}/${id}`)
+import axios from '../cors/axios-configure';
+
+export function findByProfileNickName(profile: unknown)  {
+    return axios.get(`/${profile}`)
 }
