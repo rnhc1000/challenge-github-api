@@ -58,7 +58,7 @@
 
 .container-display-busca {
 
-    display: flex;
+    display: none;
     flex-direction: row;
     height: 334px;
     width: 100%;
