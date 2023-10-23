@@ -1,6 +1,8 @@
 export type ProfileDTO = {
-    id: string,
-    createAt: string,
-    name: string,
-    avatar: string
+    id: number,
+    html_url: string,
+    followers: number,
+    avatar_url: string,
+    location: string
+    name: string
 }

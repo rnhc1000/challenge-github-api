@@ -18,11 +18,8 @@
     padding: 20px;
     color: var(--color-text-header);
 }
+
 a, a:hover {
     text-decoration: none;
     font-weight: 700;
-}
-
-.btn-home {
-
 }
