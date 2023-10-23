@@ -1,0 +1,14 @@
+.container-display-busca {
+    display: flex;
+    flex-direction: column;
+    height: 334px;
+    width: 100%;
+    max-width: 1251px;
+    border-radius: 16px;
+    background-color: var(--color-bg-busca);
+    margin: 54px 99px 0 90px;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    font-size: 24px;
+}

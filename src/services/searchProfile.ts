@@ -1,7 +1,12 @@
+import { requestAPI } from '../utils/requests';
+import { AxiosRequestConfig } from 'axios';
 
+export function findByProfileNickName(profile: string)  {
 
-import axios from '../cors/axios-configure';
-
-export function findByProfileNickName(profile: unknown)  {
-    return axios.get(`/${profile}`)
+    const config: AxiosRequestConfig = {
+        method: "GET",
+        url: `/${profile}`,
+ 
+    }
+    return requestAPI(config);
 }

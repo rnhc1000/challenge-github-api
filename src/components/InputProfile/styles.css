@@ -58,7 +58,9 @@
 
 .container-display-busca {
 
-    display: none;
+    display: flex;
+    justify-content: center;
+
     flex-direction: row;
     height: 334px;
     width: 100%;
@@ -66,29 +68,29 @@
     border-radius: 16px;
     background-color: var(--color-bg-busca);
     margin: 54px 99px 0 90px;
-    justify-content: space-between;
 
 }
 
 .container-display-avatar {
+    display: flex;
     width: 100%;
     max-width: 247px;
     height: 247px;
     border-radius: 6px;
     border: 1px solid var(--color-border-input);
     background-color: #FFF;
-    margin: 43px auto 44px 35px;
-
+    margin: 43px  auto auto 43px;
+    gap: 25px
 }
 
 .container-display-data {
     width: 100%;
-    max-width: 902px;
+    width: 902px;
     height: 247px;
     border-radius: 6px;
     border: 1px solid var(--color-border-input);
     background-color: #FFF;
-    margin: 43px 35px 44px auto;
+    margin:  0 20px auto 20px;
 
 }
 
@@ -122,4 +124,8 @@
 .avatar-size {
     width: 247px;
     height: 247px;
+}
+
+img {
+    border-radius: 5px;
 }
