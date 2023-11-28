@@ -1,39 +1,52 @@
 
 import './styles.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProfileDTO } from '../../models/profileData';
 import * as searchProfile from '../../services/searchProfile';
 import { useNavigate } from 'react-router-dom';
+
 type gitHubProfile = {
     profile?: string
 }
 
-export default function InputProfile() {
 
-    const [profileData,   setProfileData] = useState<gitHubProfile>({});
+type Props = {
+    onSearch: Function;
+}
+
+export default function InputProfile({onSearch}: Props) {
+
+
+    const [profileData, setProfileData] = useState<gitHubProfile>({});
     const [profileFound, setProfileFound] = useState<ProfileDTO>();
     const [validProfile, setValidProfile] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
+    useEffect( () => {
+        searchProfile.findByProfileNickName(String(profileData.profile))
+        .then((response) => {
+            setProfileFound(response.data);
+            setValidProfile(true);
+        }, [])
+        .catch(error => {
+            if (error.response.status === 404) {
+                setValidProfile(false);
+                navigate("/404");
+            }
+        })
+    }, [])
+
     const useHandleSubmit = (event: any) => {
 
         event.preventDefault();
-        setValidProfile(false);
-        searchProfile.findByProfileNickName(String(profileData.profile))
-            .then((response) => {
-                setProfileFound(response.data);
-                setValidProfile(true);
-            }, [])
-            .catch(error => {
-                if (error.response.status === 404) {
-                    setValidProfile(false);
-                    navigate("/404");                   
-                }
-            })
-            // .finally(()=> {
-            //     navigate("/search");
-            // })        
+        onSearch(validProfile);
+
+
+
+        // .finally(()=> {
+        //     navigate("/search");
+        // })        
     }
 
     const handleInputChange = (event: any) => {
@@ -49,6 +62,7 @@ export default function InputProfile() {
                 <div className="container-display">
                     <h3 className="main-text-display">Encontre um Perfil Github</h3>
                     <form onSubmit={useHandleSubmit}>
+
                         <div>
                             <input
                                 id="profile"
@@ -62,6 +76,7 @@ export default function InputProfile() {
                             </input>
                             <button type="submit" className="btn-encontrar">Encontrar</button>
                         </div>
+
                     </form>
                 </div>
             </section>
@@ -73,22 +88,22 @@ export default function InputProfile() {
                     <div className="container-display-busca">
                         <div className="container-display-avatar">
                             <img className="avatar-size" src={profileFound?.avatar_url}></img>
-                        
-                        <div className="container-display-data">
-                            <p>Informações</p>
-                            <div className="container-data-info">
-                                <p>Perfil: {profileFound?.html_url}</p>
+
+                            <div className="container-display-data">
+                                <p>Informações</p>
+                                <div className="container-data-info">
+                                    <p>Perfil: {profileFound?.html_url}</p>
+                                </div>
+                                <div className="container-data-info">
+                                    <p>Seguidores: {profileFound?.followers}</p>
+                                </div>
+                                <div className="container-data-info">
+                                    <p>Localidade: {profileFound?.location}</p>
+                                </div>
+                                <div className="container-data-info">
+                                    <p>Nome: {profileFound?.name}</p>
+                                </div>
                             </div>
-                            <div className="container-data-info">
-                                <p>Seguidores: {profileFound?.followers}</p>
-                            </div>
-                            <div className="container-data-info">
-                                <p>Localidade: {profileFound?.location}</p>
-                            </div>
-                            <div className="container-data-info">
-                                <p>Nome: {profileFound?.name}</p>
-                            </div>
-                        </div>
                         </div>
                     </div>
                 </section>
